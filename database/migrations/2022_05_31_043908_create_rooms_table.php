@@ -14,8 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->id();
+            $table->id('room_id');
+            $table->foreignId('building_id');
+            $table->string('name');
+            $table->string('floor');
+            $table->foreignId('created_by');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

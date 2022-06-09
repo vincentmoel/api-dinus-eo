@@ -5,15 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Building extends Model
+class Event extends Model
 {
     use SoftDeletes;
+    protected $primaryKey = 'event_id';
 
-    protected $guarded = ['building_id'];
+    protected $guarded  = ['event_id'];
+    protected $with     = ['room'];
 
-    public function rooms()
+
+    public function room()
     {
-        return $this->hasMany(Room::class);
+        return $this->belongsTo(Room::class,'room_id');
     }
 
     public function user()
