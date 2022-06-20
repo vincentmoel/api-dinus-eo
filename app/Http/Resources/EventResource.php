@@ -18,12 +18,19 @@ class EventResource extends JsonResource
             'event_id'      => $this->event_id,
             'room'          => $this->room->name,
             'name'          => $this->name,
-            'from_date'     => $this->from_date,
-            'until_date'    => $this->until_date,
+            'from_date'     => $this->createDateFormat($this->from_date)." WIB",
+            'until_date'    => $this->createDateFormat($this->until_date)." WIB",
             'image'         => $this->image,
             'contact'       => $this->contact,
-            'description'   => $this->contact,
-            'link'          => $this->contact,
+            'description'   => $this->description,
+            'link'          => $this->link,
+            'category'      => $this->category,
         ];
+    }
+
+    public function createDateFormat($date)
+    {
+        $date = date_create($date);
+        return date_format($date,"d F Y H:i");
     }
 }

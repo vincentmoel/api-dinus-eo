@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('contact');
             $table->text('description');
             $table->string('link');
+            $table->string('category');
             $table->foreignId('created_by');
             $table->timestamps();
             $table->softDeletes();
