@@ -29,7 +29,6 @@ class HomeController extends Controller
         $getData = Event::where('from_date','<',date('Y-m-d H:i:s'))
             ->where('until_date','>',date('Y-m-d H:i:s'))
             ->orderBy('from_date', 'desc')->get();
-        dd($getData);
         return ['on_going' => new EventCollection($getData)];
     }
 

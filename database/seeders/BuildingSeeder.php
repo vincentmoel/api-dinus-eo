@@ -16,7 +16,31 @@ class BuildingSeeder extends Seeder
     public function run()
     {
         Building::create([
-            "name"          => "Gedung H",
+            "name"          => "Video Conference",
+            "created_by"    => 1
+        ]);
+        Building::create([
+            "name"          => "Gedung A",
+            "created_by"    => 1
+        ]);
+        Building::create([
+            "name"          => "Gedung B",
+            "created_by"    => 1
+        ]);
+        Building::create([
+            "name"          => "Gedung C",
+            "created_by"    => 1
+        ]);
+        Building::create([
+            "name"          => "Gedung D",
+            "created_by"    => 1
+        ]);
+        Building::create([
+            "name"          => "Gedung E",
+            "created_by"    => 1
+        ]);
+        Building::create([
+            "name"          => "Gedung F",
             "created_by"    => 1
         ]);
         Building::create([
@@ -24,7 +48,7 @@ class BuildingSeeder extends Seeder
             "created_by"    => 1
         ]);
         Building::create([
-            "name"          => "Gedung E",
+            "name"          => "Gedung H",
             "created_by"    => 1
         ]);
     }

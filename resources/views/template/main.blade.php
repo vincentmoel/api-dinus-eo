@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>GIA</title>
+    <title>Dinus Event</title>
 
     <!-- Favicons -->
-    <link href="/assets/img/logo.svg" rel="icon">
+    <link href="/assets/img/logo.png" rel="icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
