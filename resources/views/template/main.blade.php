@@ -3,6 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="metaimage" property="og:image" content="https://dinus-eo.vincentmoel.com/storage/images/logo_udinus.png">
+    <meta name="metaname" property="og:site_name" content="Dian Nuswantoro Event">
+    <meta property="og:site" content="https://dinus-eo.vincentmoel.com">
+    <meta name="metatitle" property="og:title" content="Dian Nuswantoro Event">
+    <meta name="metadescription" property="og:description" content="Website By : Vincent Nathaniel Moeljopranoto">
+    <meta name="metaurl" property="og:url" content="https://dinus-eo.vincentmoel.com">
+
     <title>Dinus Event</title>
 
     <!-- Favicons -->
