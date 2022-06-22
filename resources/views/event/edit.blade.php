@@ -95,8 +95,9 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                value="{{ old('description', $event->description) }}">
+            {{-- <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
+                value="{{ old('description', $event->description) }}"> --}}
+                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="3">{{ old('description', $event->description) }}</textarea>
             @error('description')
                 <div class="invalid-feedback">
                     {{ $message }}

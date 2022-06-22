@@ -86,9 +86,9 @@
                     @endphp
                     <td>{{ $from_date }}</td>
                     <td>{{ $until_date }}</td>
-                    <td><img src="{{ asset('storage/' . $event->image) }}" width="70px"></td>
+                    <td><img src="{{ asset('storage/' . $event->image) }}" width="40px"></td>
                     <td>{{ $event->contact }}</td>
-                    <td>{{ $event->link }}</td>
+                    <td><a href="{{ $event->link }}" target="_blank">Register</a></td>
                     <td>{{ $event->category }}</td>
                     <td class="text-center text-xxl-start">
                         <a href="/events/{{ $event->event_id }}/edit" class="btn btn-primary mb-1 mb-xxl-0"><i

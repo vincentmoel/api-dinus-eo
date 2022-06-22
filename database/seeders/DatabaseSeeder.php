@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            // BuildingSeeder::class,
-            // RoomSeeder::class,
-            // EventSeeder::class,
+            BuildingSeeder::class,
+            RoomSeeder::class,
+            EventSeeder::class,
         ]);
     }
 }
