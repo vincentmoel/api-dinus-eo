@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\HomeController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\EventController;
+use App\Http\Controllers\API\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*

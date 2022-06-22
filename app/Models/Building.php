@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Building extends Model
 {
     use SoftDeletes;
-
+    
+    protected $primaryKey = 'building_id';
+    protected $with = ['user'];
     protected $guarded = ['building_id'];
 
     public function rooms()
@@ -18,6 +20,6 @@ class Building extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'created_by');
     }
 }

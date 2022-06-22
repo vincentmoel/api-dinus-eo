@@ -1,0 +1,36 @@
+.color-gia{
+    color: #EFAE2C;
+}
+
+.btn-add{
+    background-color: var(--color-secondary-dark);
+    color: var(--color-white);
+    font-family: var(--font-secondary);
+}
+
+.btn-add:hover{
+    color: wheat;
+}
+
+.btn-logout{
+    font-size: 16px;
+    color: var(--color-white);
+    background: #DC3545;
+    padding: 8px 23px;
+    border-radius: 4px;
+    transition: 0.3s;
+    font-family: var(--font-secondary);
+    border: none
+}
+
+.header-wrapper {
+    border-bottom: solid #dee2e6 1px;
+}
+
+#go-back-link:hover #arrow-left{
+    display: none;
+}
+
+#go-back-link:hover #arrow-left-fill{
+    display: inline !important;
+}
