@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[HomeController::class,'index'])->middleware('revalidate');
+
 Route::post('/login',[AuthController::class,'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/logout', function () { return redirect('/'); });

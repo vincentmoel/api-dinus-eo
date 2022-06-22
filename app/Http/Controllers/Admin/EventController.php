@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Services\EventServices;
 use App\Services\RoomServices;
@@ -41,10 +42,16 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
+        if($request->category == 'online')
+        {
+            $this->eventServices->saveData($request);
+            return redirect('/events')->with('success', 'Success Save Data');
+        }
+
         $isAvailable = $this->eventServices->isAvailable($request->from_date,$request->until_date,$request->room_id);
         if($isAvailable == 'available')
         {
-            $this->eventService->saveData($request);
+            $this->eventServices->saveData($request);
             return redirect('/events')->with('success', 'Success Save Data');
         }
         else
@@ -76,7 +83,11 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $rooms = $this->roomServices->getAll();
+        return view('event.edit',[
+            'event'  => $event,
+            'rooms' => $rooms
+        ]);
     }
 
     /**
@@ -86,9 +97,28 @@ class EventController extends Controller
      * @param  \App\Models\Event  $Event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        if($request->category == 'online')
+        {
+            $this->eventServices->updateData($request,$event);
+            return redirect('/events')->with('success', 'Success Update Data');
+        }
+
+        $isAvailable = $this->eventServices->isAvailable($request->from_date,$request->until_date,$request->room_id,$event->event_id);
+        if($isAvailable == 'available')
+        {
+            $this->eventServices->updateData($request,$event);
+            return redirect('/events')->with('success', 'Success Update Data');
+        }
+        else
+        {
+            $room = $this->roomServices->getRoomById($request->room_id);
+            return redirect("/events/$event->event_id/edit")->with([
+                'error' => "Error : ".$room->name." Collision of dates",
+                'data'  => $isAvailable
+            ])->withInput();
+        }
     }
 
     /**
@@ -99,6 +129,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $this->eventServices->deleteData($event);
+        return redirect('/events')->with('success' , 'Success Delete Data');
+
     }
 }

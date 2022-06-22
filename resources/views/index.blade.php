@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="header-wrapper pb-3 mb-4 d-flex justify-content-between">
-        <h1 class="align-self-center">On Going Schedules</h1>
+        <h1 class="align-self-center">On Going Events</h1>
         <h2>
             <div>{{ date("l, d-m-Y") }}</div>
             <div id="runningTime" class="text-center fw-bolder" >{{ date('H:i:s') }}</div>
@@ -15,9 +15,10 @@
             <tr>
                 <th>No</th>
                 <th>Room</th>
+                <th>Name</th>
                 <th>From Date</th>
                 <th>Until Date</th>
-                <th>Description</th>
+                <th>Category</th>
 
             </tr>
         </thead>
@@ -44,9 +45,10 @@
                     <tr @if($from_date_second <= $date_now && $date_now < $until_date_second) style="background-color: #d1e7dd" @endif>
                         <td>{{ $no++ }}</td>
                         <td>{{ $event->room->name }}</td>
+                        <td>{{ $event->name }}</td>
                         <td>{{ $from_date }}</td>
                         <td>{{ $until_date }}</td>
-                        <td>{{ $event->description }}</td>
+                        <td>{{ $event->category }}</td>
 
                     </tr>
                 @endforeach

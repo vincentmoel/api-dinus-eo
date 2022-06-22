@@ -28,7 +28,6 @@ class UpdateEventRequest extends FormRequest
             'name'          => 'required',
             'from_date'     => 'required|before:until_date',
             'until_date'    => 'required|after:from_date',
-            'image'         => 'required',
             'contact'       => 'required',
             'description'   => 'required',
             'link'          => 'required',

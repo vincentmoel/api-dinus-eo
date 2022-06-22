@@ -2,8 +2,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
         <a href="/" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-            <img src="/assets/img/logo.svg" alt="">
-            <span class="color-gia ms-2" style="font-family: var(--font-secondary);">GIA Pringgading</span>
+            <img src="/assets/img/logo.png" alt="">
         </a>
 
         <nav id="navbar" class="navbar">
@@ -15,7 +14,6 @@
                     <li><a class="{{ (request()->segment(1) == 'rooms') ? 'active' : '' }}" href="/rooms">Rooms</a></li>
                     <li><a class="{{ (request()->segment(1) == 'buildings') ? 'active' : '' }}" href="/buildings">Buildings</a></li>
                 @endauth
-                <li><a class="" href="/schedules">Schedules</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle d-none"></i>
         </nav><!-- .navbar -->

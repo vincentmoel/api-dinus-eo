@@ -29,7 +29,7 @@
                                 $from_date = date('d-m-Y H:i', strtotime($data->from_date));
                                 $until_date = date('d-m-Y H:i', strtotime($data->until_date));
                             @endphp
-                            <li>{{ $data->description }} |
+                            <li>{{ $data->name }} |
                                 <strong>{{ $from_date }} to {{ $until_date }}</strong>
                             </li>
                         @endforeach
@@ -62,7 +62,6 @@
                 <th>Until Date</th>
                 <th>Image</th>
                 <th>Contact</th>
-                <th>Description</th>
                 <th>Link</th>
                 <th>Category</th>
                 <th>Action</th>
@@ -80,16 +79,15 @@
                     <td>{{ $no++ }}</td>
                     <td>{{ $event->room->name }}</td>
                     <td>{{ $event->name }}</td>
-                   
+
                     @php
                         $from_date = date('d-m-Y H:i', strtotime($event->from_date));
                         $until_date = date('d-m-Y H:i', strtotime($event->until_date));
                     @endphp
                     <td>{{ $from_date }}</td>
                     <td>{{ $until_date }}</td>
-                    <td>{{ $event->image }}</td>
+                    <td><img src="{{ asset('storage/' . $event->image) }}" width="70px"></td>
                     <td>{{ $event->contact }}</td>
-                    <td>{{ $event->description }}</td>
                     <td>{{ $event->link }}</td>
                     <td>{{ $event->category }}</td>
                     <td class="text-center text-xxl-start">
@@ -115,7 +113,6 @@
                 <th>Until Date</th>
                 <th>Image</th>
                 <th>Contact</th>
-                <th>Description</th>
                 <th>Link</th>
                 <th>Category</th>
                 <th>Action</th>
@@ -134,7 +131,7 @@
                     <h5 class="modal-title" id="addDataModalLabel">Add event</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/events" method="POST">
+                <form action="/events" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -143,10 +140,10 @@
                                 aria-label="Default select example" name="room_id">
                                 <option value="" selected disabled>Choose One</option>
                                 @foreach ($rooms as $room)
-                                    @if (old('room_id') == $room->id)
-                                        <option value="{{ $room->id }}" selected>{{ $room->name }}</option>
+                                    @if (old('room_id') == $room->room_id)
+                                        <option value="{{ $room->room_id }}" selected>{{ $room->name }}</option>
                                     @else
-                                        <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                        <option value="{{ $room->room_id }}">{{ $room->name }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -158,28 +155,39 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="borrower_name" class="form-label">Borrower Name</label>
-                            <input type="text" name="borrower_name"
-                                class="form-control @error('borrower_name') is-invalid @enderror"
-                                value="{{ old('borrower_name') }}">
-                            @error('borrower_name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
-                                value="{{ old('phone') }}">
-                            @error('phone')
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}">
+                            @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
 
-                       
+                        <div class="mb-3">
+                            <label for="Contact" class="form-label">Contact</label>
+                            <input type="text" name="contact" class="form-control @error('contact') is-invalid @enderror"
+                                value="{{ old('contact') }}">
+                            @error('contact')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="link" class="form-label">Link</label>
+                            <input type="text" name="link" class="form-control @error('link') is-invalid @enderror"
+                                value="{{ old('link') }}">
+                            @error('link')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
@@ -216,6 +224,30 @@
                                 </div>
                             @enderror
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Image</label>
+                            <img class="img-preview img-fluid mb-3 col-sm-2">
+                            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
+                                name="image" onchange="previewImage()">
+                            @error('image')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select @error('category') is-invalid @enderror"
+                                aria-label="Default select example" name="category">
+                                <option value="online" selected>Online</option>
+                                <option value="offline">Offline</option>
+                            </select>
+                            @error('category')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer justify-content-between text-center">
                         <button type="reset" class="btn btn-secondary">Clear Form</button>
@@ -239,7 +271,7 @@
                 $('#addDataModal').modal('show');
             @endif
 
-            
+
 
 
         });

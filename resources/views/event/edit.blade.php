@@ -8,10 +8,10 @@
 
     <div class="header-wrapper pb-3 mb-4">
 
-        <a href="/rents" class="text-dark" id="go-back-link">
+        <a href="/events" class="text-dark" id="go-back-link">
 
             <h2><i class="bi bi-arrow-left-circle" id="arrow-left"></i><i class="bi bi-arrow-left-circle-fill d-none"
-                    id="arrow-left-fill"></i> Edit Rent</h2>
+                    id="arrow-left-fill"></i> Edit Event</h2>
         </a>
     </div>
 
@@ -36,7 +36,7 @@
         </div>
     @endif
 
-    <form action="/rents/{{ $rent->id }}" method="POST">
+    <form action="/events/{{ $event->event_id }}" method="POST" enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="mb-3">
@@ -45,10 +45,10 @@
                 name="room_id">
                 <option value="" selected disabled>Choose One</option>
                 @foreach ($rooms as $room)
-                    @if (old('room_id', $rent->room_id) == $room->id)
-                        <option value="{{ $room->id }}" selected>{{ $room->name }}</option>
+                    @if (old('room_id', $event->room_id) == $room->room_id)
+                        <option value="{{ $room->room_id }}" selected>{{ $room->name }}</option>
                     @else
-                        <option value="{{ $room->id }}">{{ $room->name }}</option>
+                        <option value="{{ $room->room_id }}">{{ $room->name }}</option>
                     @endif
                 @endforeach
             </select>
@@ -60,20 +60,31 @@
         </div>
 
         <div class="mb-3">
-            <label for="borrower_name" class="form-label">Borrower Name</label>
-            <input type="text" name="borrower_name" class="form-control @error('borrower_name') is-invalid @enderror"
-                value="{{ old('borrower_name', $rent->borrower_name) }}">
-            @error('borrower_name')
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                value="{{ old('name', $event->name) }}">
+            @error('name')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
         </div>
         <div class="mb-3">
-            <label for="phone" class="form-label">Phone</label>
-            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
-                value="{{ old('phone', $rent->phone) }}">
-            @error('phone')
+            <label for="contact" class="form-label">Contact</label>
+            <input type="text" name="contact" class="form-control @error('contact') is-invalid @enderror"
+                value="{{ old('contact', $event->contact) }}">
+            @error('contact')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        
+        <div class="mb-3">
+            <label for="link" class="form-label">Link</label>
+            <input type="text" name="link" class="form-control @error('link') is-invalid @enderror"
+                value="{{ old('link', $event->link) }}">
+            @error('link')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -85,7 +96,7 @@
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                value="{{ old('description', $rent->description) }}">
+                value="{{ old('description', $event->description) }}">
             @error('description')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -114,6 +125,31 @@
                 </div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label class="form-label">Image</label>
+            <img class="img-preview img-fluid mb-3 col-sm-2">
+            <input class="form-control" type="hidden" value="{{ $event->image }}" name="oldImage">
+            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
+                name="image">
+            @error('image')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select @error('category') is-invalid @enderror"
+                aria-label="Default select example" name="category">
+                <option value="online" @if($event->category == 'online') selected @endif>Online</option>
+                <option value="offline" @if($event->category == 'offline') selected @endif>Offline</option>
+            </select>
+            @error('category')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
         <div class="btn-wrapper">
             <button type="submit" class="btn btn-success">Update</button>
         </div>
@@ -122,8 +158,8 @@
     <script>
         $(document).ready(function() {
             @php
-                $from_date = date('m/d/Y H:i', strtotime(old('from_date',$rent->from_date)));
-                $until_date = date('m/d/Y H:i', strtotime(old('until_date',$rent->until_date)));
+                $from_date = date('m/d/Y H:i', strtotime(old('from_date',$event->from_date)));
+                $until_date = date('m/d/Y H:i', strtotime(old('until_date',$event->until_date)));
             @endphp
 
             $('#endDate').val("{{ $until_date }}");

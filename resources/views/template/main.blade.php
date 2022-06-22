@@ -7,7 +7,6 @@
 
     <!-- Favicons -->
     <link href="/assets/img/logo.svg" rel="icon">
-    <link href="/assets/img/logo.svg" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

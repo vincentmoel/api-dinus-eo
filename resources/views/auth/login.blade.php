@@ -2,9 +2,9 @@
 
 @section('container')
 
-    <div class="card text-center py-4 make-middle" style="width: 20rem; max-height: 350px !important" >
+    <div class="card text-center py-4 make-middle" style="width: 20rem; max-height: 390px !important" >
         <a href="/">
-            <img src="/assets/img/logo.svg" alt="" width="100px" class="mx-auto mb-3">
+            <img src="/assets/img/logo.png" alt="" width="100px" class="mx-auto mb-3">
         </a>
         <div class="card-body">
             <form action="/login" method="POST">

@@ -28,7 +28,7 @@ class StoreEventRequest extends FormRequest
             'name'          => 'required',
             'from_date'     => 'required|before:until_date',
             'until_date'    => 'required|after:from_date',
-            'image'         => 'required',
+            'image'         => 'required|image|file|max:5120',
             'contact'       => 'required',
             'description'   => 'required',
             'link'          => 'required',
